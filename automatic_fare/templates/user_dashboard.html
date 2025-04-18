@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Welcome, {{ request.user.username }}</h1>
+    <hr>
+    
+    <h3>Your RFID Cards</h3>
+    <div class="row">
+        {% for card in rfid_cards %}
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Card ID: {{ card.card_id }}</h5>
+                    <p class="card-text">Balance: ${{ card.balance }}</p>
+                    <h6>Ride History:</h6>
+                    <ul>
+                        {% for ride in card.rides.all %}
+                        <li>
+                            <strong>Ride {{ ride.id }}:</strong>
+                            Started at {{ ride.start_time }} 
+                            {% if ride.ride_ended %} | Ended at {{ ride.end_time }} | Fare: ${{ ride.fare }}
+                            {% else %} | Ongoing
+                            {% endif %}
+                        </li>
+                        {% empty %}
+                        <p>No rides for this card yet.</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No RFID cards found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

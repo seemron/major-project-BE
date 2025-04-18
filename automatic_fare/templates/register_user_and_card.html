@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Register User and Assign RFID Card</h1>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        
+        <h3>User Information</h3>
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Username</label>
+            {{ user_form.username }}
+        </div>
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email</label>
+            {{ user_form.email }}
+        </div>
+        <div class="mb-3">
+            <label for="id_first_name" class="form-label">First Name</label>
+            {{ user_form.first_name }}
+        </div>
+        <div class="mb-3">
+            <label for="id_last_name" class="form-label">Last Name</label>
+            {{ user_form.last_name }}
+        </div>
+        <div class="mb-3">
+            <label for="id_password" class="form-label">Password</label>
+            {{ user_form.password }}
+        </div>
+        <div class="mb-3">
+            <label for="id_confirm_password" class="form-label">Confirm Password</label>
+            {{ user_form.confirm_password }}
+        </div>
+        
+        <h3>RFID Card Information</h3>
+        <div class="mb-3">
+            <label for="id_card_id" class="form-label">Card ID</label>
+            {{ card_form.card_id }}
+        </div>
+        <div class="mb-3">
+            <label for="id_balance" class="form-label">Balance</label>
+            {{ card_form.balance }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{% endblock %}

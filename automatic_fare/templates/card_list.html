@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">RFID Cards</h2>
+<div class="row">
+    {% for card in cards %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Card ID: {{ card.card_id }}</h5>
+                <p class="card-text">Balance: ${{ card.balance }}</p>
+                {% comment %} <a href="{% url 'add_ride' card.id %}" class="btn btn-primary">Add Ride</a> {% endcomment %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No RFID cards available.</p>
+    {% endfor %}
+</div>
+<a href="{% url 'add_card' %}" class="btn btn-success">Add New Card</a>
+{% endblock %}
